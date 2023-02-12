@@ -1,9 +1,9 @@
-
 from sqlite3 import Timestamp
 from pandas import DatetimeTZDtype
 from sqlalchemy import create_engine, Column, Integer, String, DateTime, Float, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
@@ -26,7 +26,7 @@ class Coins(Base):
     percent_change_7d = Column(Float)
    
     def start():
-        db_string = "postgresql://postgres:*8xayZycAE5m@server01.csddqd4agbf7.us-east-1.rds.amazonaws.com/coins"
+        db_string = "postgresql://postgres:Fmxkrr9090@server01.cahctfwlqo4e.eu-west-1.rds.amazonaws.com/coins"
         engine = create_engine(db_string)
         Session = sessionmaker(bind=engine)
         session = Session()

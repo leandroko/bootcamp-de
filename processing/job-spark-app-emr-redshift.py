@@ -101,20 +101,20 @@ def analytics_tables(bucket, dataframe, table_name, flag_write_redshift, url_jdb
 
 
 # Ler dados da raw
-df = read_csv('s3a://raw-stack-bootcampde','public/tb_coins/')
+df = read_csv('s3a://raw-stack-bootcampde-liu','public/tb_coins/')
 
 # Cria uma coluna de ano para particionar os dados
 df = df.withColumn("year", year(df.data_added))
 
 # Processa os dados e escreve na camada processed
-write_processed("s3a://processed-stack-bootcampde","tb_coins","year","delta","overwrite")
+write_processed("s3a://processed-stack-bootcampde-liu","tb_coins","year","delta","overwrite")
 
 # Lear dados da processed e escreve na camada curated.
-df = read_delta("s3a://processed-stack-bootcampde","tb_coins")
+df = read_delta("s3a://processed-stack-bootcampde-liu","tb_coins")
 
 flag_write_redshift = True
 url_jdbc = "jdbc:redshift://redshift-cluster-1.cufcxu0ztur8.us-east-1.redshift.amazonaws.com:5439/dev"
-analytics_tables("s3a://curated-stack-bootcampde",df,"tb_coins", flag_write_redshift, url_jdbc)
+analytics_tables("s3a://curated-stack-bootcampde-liuss",df,"tb_coins", flag_write_redshift, url_jdbc)
 
 # para a aplicação
 spark.stop()
